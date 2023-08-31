@@ -5,7 +5,7 @@ import (
 	"log"
 	"os/exec"
 
-	"al/commands"
+	"github.com/meinbaumm/al/commands"
 
 	"github.com/urfave/cli/v2"
 )

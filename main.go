@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"al/commands/close"
-	"al/commands/open"
-	"al/commands/web"
+	"github.com/meinbaumm/al/commands/close"
+	"github.com/meinbaumm/al/commands/open"
+	"github.com/meinbaumm/al/commands/web"
 
 	"github.com/urfave/cli/v2"
 )

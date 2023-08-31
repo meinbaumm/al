@@ -1,4 +1,4 @@
-module al
+module github.com/meinbaumm/al
 
 go 1.20
 
