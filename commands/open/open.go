@@ -5,14 +5,12 @@ import (
 	"log"
 	"os/exec"
 
-	"github.com/meinbaumm/al/commands"
+	"github.com/meinbaumm/al/commands/config"
 
 	"github.com/urfave/cli/v2"
 )
 
-type appsMap map[string]string
-
-func Open(ctx *cli.Context, appsToOpen appsMap) error {
+func Open(ctx *cli.Context, appsToOpen config.CommandConfig) error {
 	args := ctx.Args().Slice()
 	if len(args) == 0 {
 		fmt.Println("Please specify apps to open")
@@ -20,18 +18,13 @@ func Open(ctx *cli.Context, appsToOpen appsMap) error {
 	}
 
 	for _, app := range args {
-		if app == "showall" {
-			showAllApps(appsToOpen)
-			continue
-		}
-
 		openApp(appsToOpen, app)
 	}
 
 	return nil
 }
 
-func openApp(appsToOpen appsMap, appName string) {
+func openApp(appsToOpen config.CommandConfig, appName string) {
 	if app, ok := appsToOpen[appName]; ok {
 		err := exec.Command("open", app).Start()
 		if err != nil {
@@ -43,6 +36,9 @@ func openApp(appsToOpen appsMap, appName string) {
 	fmt.Println("No such application with name " + appName)
 }
 
-func showAllApps(appsToShow appsMap) {
-	commands.Show(commands.GetSortedMapKeys(appsToShow), "apps")
+func List(ctx *cli.Context, appsToOpen config.CommandConfig) error {
+	verbose := ctx.Bool("v")
+	config.ShowCommandConfig(appsToOpen, "apps", verbose)
+
+	return nil
 }
