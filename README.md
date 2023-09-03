@@ -18,7 +18,7 @@ USAGE:
    al [global options] command [command options] [arguments...]
 
 VERSION:
-   0.1.2
+   0.1.3
 
 AUTHOR:
    Maxim Petrenko <meinbaumm@gmail.com>
@@ -86,7 +86,7 @@ USAGE:
    al [global options] command [command options] [arguments...]
 
 VERSION:
-   0.1.2
+   0.1.3
 
 AUTHOR:
    Maxim Petrenko <meinbaumm@gmail.com>
