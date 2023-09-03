@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"fmt"
@@ -8,12 +8,14 @@ import (
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
+type CommandConfig map[string]string
+
 var alConfigEnvName = "AL_CONFIG"
 
 type config struct {
-	Urls  map[string]string `yaml:"urls"`
-	Open  map[string]string `yaml:"apps-to-open"`
-	Close map[string]string `yaml:"apps-to-close"`
+	Urls  CommandConfig `yaml:"urls"`
+	Open  CommandConfig `yaml:"apps-to-open"`
+	Close CommandConfig `yaml:"apps-to-close"`
 }
 
 func ReadConfig() (*config, error) {

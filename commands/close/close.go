@@ -5,14 +5,12 @@ import (
 	"log"
 	"os/exec"
 
-	"github.com/meinbaumm/al/commands"
+	"github.com/meinbaumm/al/commands/config"
 
 	"github.com/urfave/cli/v2"
 )
 
-type appsMap map[string]string
-
-func Close(ctx *cli.Context, appsToClose appsMap) error {
+func Close(ctx *cli.Context, appsToClose config.CommandConfig) error {
 	args := ctx.Args().Slice()
 	if len(args) == 0 {
 		fmt.Println("Please specify apps to close")
@@ -20,18 +18,13 @@ func Close(ctx *cli.Context, appsToClose appsMap) error {
 	}
 
 	for _, app := range args {
-		if app == "showall" {
-			showAllApps(appsToClose)
-			continue
-		}
-
 		closeApp(appsToClose, app)
 	}
 
 	return nil
 }
 
-func closeApp(appsToClose appsMap, appName string) {
+func closeApp(appsToClose config.CommandConfig, appName string) {
 	if app, ok := appsToClose[appName]; ok {
 		err := exec.Command("osascript", "-e", app).Run()
 		if err != nil {
@@ -43,6 +36,9 @@ func closeApp(appsToClose appsMap, appName string) {
 	fmt.Println("No such application with name " + appName)
 }
 
-func showAllApps(appsToShow appsMap) {
-	commands.Show(commands.GetSortedMapKeys(appsToShow), "apps")
+func List(ctx *cli.Context, appsToClose config.CommandConfig) error {
+	verbose := ctx.Bool("v")
+	config.ShowCommandConfig(appsToClose, "apps", verbose)
+
+	return nil
 }

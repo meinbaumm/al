@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/meinbaumm/al/commands/close"
+	"github.com/meinbaumm/al/commands/config"
 	"github.com/meinbaumm/al/commands/open"
 	"github.com/meinbaumm/al/commands/web"
 
@@ -13,7 +14,7 @@ import (
 )
 
 func main() {
-	cfg, err := ReadConfig()
+	cfg, err := config.ReadConfig()
 	if err != nil {
 		log.Fatal(fmt.Errorf("error reading config file: %w", err))
 	}
@@ -21,7 +22,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "al"
 	app.Usage = "Open/close web urls/apps"
-	app.Version = "0.1.1"
+	app.Version = "0.1.2"
 	app.Authors = []*cli.Author{
 		{
 			Name:  "Maxim Petrenko",
@@ -41,6 +42,27 @@ func main() {
 
 				return nil
 			},
+			Subcommands: []*cli.Command{
+				{
+					Name:  "list",
+					Usage: "List all web urls in config file",
+					Action: func(ctx *cli.Context) error {
+						err := web.List(ctx, cfg.Urls)
+						if err != nil {
+							log.Fatal(err)
+						}
+
+						return nil
+					},
+					Flags: []cli.Flag{
+						&cli.BoolFlag{
+							Name:    "verbose",
+							Aliases: []string{"v"},
+							Usage:   "Show keys and values",
+						},
+					},
+				},
+			},
 		},
 		{
 			Name:  "open",
@@ -53,6 +75,27 @@ func main() {
 
 				return nil
 			},
+			Subcommands: []*cli.Command{
+				{
+					Name:  "list",
+					Usage: "List all applications to open in config file",
+					Action: func(ctx *cli.Context) error {
+						err := open.List(ctx, cfg.Urls)
+						if err != nil {
+							log.Fatal(err)
+						}
+
+						return nil
+					},
+					Flags: []cli.Flag{
+						&cli.BoolFlag{
+							Name:    "verbose",
+							Aliases: []string{"v"},
+							Usage:   "Show keys and values",
+						},
+					},
+				},
+			},
 		},
 		{
 			Name:  "close",
@@ -64,6 +107,27 @@ func main() {
 				}
 
 				return nil
+			},
+			Subcommands: []*cli.Command{
+				{
+					Name:  "list",
+					Usage: "List all applications to close in config file",
+					Action: func(ctx *cli.Context) error {
+						err := open.List(ctx, cfg.Urls)
+						if err != nil {
+							log.Fatal(err)
+						}
+
+						return nil
+					},
+					Flags: []cli.Flag{
+						&cli.BoolFlag{
+							Name:    "verbose",
+							Aliases: []string{"v"},
+							Usage:   "Show keys and values",
+						},
+					},
+				},
 			},
 		},
 	}

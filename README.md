@@ -18,7 +18,7 @@ USAGE:
    al [global options] command [command options] [arguments...]
 
 VERSION:
-   0.1.1
+   0.1.2
 
 AUTHOR:
    Maxim Petrenko <meinbaumm@gmail.com>
@@ -78,7 +78,7 @@ export AL_CONFIG="/home/username/al-config.yml"
 
 `al help` – shows help command
 
-```
+```bash
 NAME:
    al - Open/close web urls/apps
 
@@ -86,7 +86,7 @@ USAGE:
    al [global options] command [command options] [arguments...]
 
 VERSION:
-   0.1.1
+   0.1.2
 
 AUTHOR:
    Maxim Petrenko <meinbaumm@gmail.com>
@@ -106,6 +106,6 @@ GLOBAL OPTIONS:
 - `al close safari calendar books` – will close opened applications
 - `al web github facebook` – will open github and facebook websites in your default browser
 
-To any command (open, close, web) you can provide `showall` option. Then you will see all available apps or urls, specified in your config.
+For any command, there is a `list` subcommand to see list of available apps/urls in your config file. For example  
 
-`al open showall` – will show all available apps to open.
+- `al web list` – will print all url names from your config file in ascending order. If you want to see not only url names, but urls too, use `--verbose` flag.

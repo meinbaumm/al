@@ -5,14 +5,12 @@ import (
 	"log"
 	"os/exec"
 
-	"github.com/meinbaumm/al/commands"
+	"github.com/meinbaumm/al/commands/config"
 
 	"github.com/urfave/cli/v2"
 )
 
-type urlsMap map[string]string
-
-func Web(ctx *cli.Context, urlsToOpen urlsMap) error {
+func Web(ctx *cli.Context, urlsToOpen config.CommandConfig) error {
 	args := ctx.Args().Slice()
 	if len(args) == 0 {
 		fmt.Println("Please specify urls to open")
@@ -20,18 +18,20 @@ func Web(ctx *cli.Context, urlsToOpen urlsMap) error {
 	}
 
 	for _, url := range args {
-		if url == "showall" {
-			showAllURLs(urlsToOpen)
-			continue
-		}
-
 		openUrl(urlsToOpen, url)
 	}
 
 	return nil
 }
 
-func openUrl(urlsToOpen urlsMap, urlName string) {
+func List(ctx *cli.Context, urlsToShow config.CommandConfig) error {
+	verbose := ctx.Bool("v")
+	config.ShowCommandConfig(urlsToShow, "urls", verbose)
+
+	return nil
+}
+
+func openUrl(urlsToOpen config.CommandConfig, urlName string) {
 	if url, ok := urlsToOpen[urlName]; ok {
 		err := exec.Command("open", url).Start()
 		if err != nil {
@@ -41,8 +41,4 @@ func openUrl(urlsToOpen urlsMap, urlName string) {
 	}
 
 	fmt.Println("No such url with name " + urlName)
-}
-
-func showAllURLs(urlsToShow urlsMap) {
-	commands.Show(commands.GetSortedMapKeys(urlsToShow), "urls")
 }
