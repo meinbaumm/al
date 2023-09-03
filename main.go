@@ -78,7 +78,7 @@ func main() {
 			Subcommands: []*cli.Command{
 				{
 					Name:  "list",
-					Usage: "List all applications to open in config file",
+					Usage: "List all apps-to-open in config file",
 					Action: func(ctx *cli.Context) error {
 						err := open.List(ctx, cfg.Urls)
 						if err != nil {
@@ -111,7 +111,7 @@ func main() {
 			Subcommands: []*cli.Command{
 				{
 					Name:  "list",
-					Usage: "List all applications to close in config file",
+					Usage: "List all apps-to-close in config file",
 					Action: func(ctx *cli.Context) error {
 						err := open.List(ctx, cfg.Urls)
 						if err != nil {
