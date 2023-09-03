@@ -2,6 +2,38 @@
 
 AL is a cli tool for open/close your apps and web URLs.
 
+## Installation
+
+```bash
+go install github.com/meinbaumm/al@latest
+```
+
+```bash
+[~]$ al
+
+NAME:
+   al - Open/close web urls/apps
+
+USAGE:
+   al [global options] command [command options] [arguments...]
+
+VERSION:
+   0.1.1
+
+AUTHOR:
+   Maxim Petrenko <meinbaumm@gmail.com>
+
+COMMANDS:
+   web      Open web urls
+   open     Open apps
+   close    Close apps
+   help, h  Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --help, -h     show help
+   --version, -v  print the version
+```
+
 ## How to setup?
 
 Now AL support 3 command.
