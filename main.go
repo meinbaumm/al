@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/meinbaumm/al/commands/close"
-	"github.com/meinbaumm/al/commands/config"
 	"github.com/meinbaumm/al/commands/open"
 	"github.com/meinbaumm/al/commands/web"
+	"github.com/meinbaumm/al/config"
 
 	"github.com/urfave/cli/v2"
 )
@@ -22,7 +22,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "al"
 	app.Usage = "Open/close web urls/apps"
-	app.Version = "0.1.2"
+	app.Version = "0.1.3"
 	app.Authors = []*cli.Author{
 		{
 			Name:  "Maxim Petrenko",
